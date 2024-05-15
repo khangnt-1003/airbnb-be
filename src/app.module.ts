@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { StaysModule } from './stays/stays.module';
+import { StaysModule } from './modules/stays/stays.module';
 import { ConfigModule } from '@nestjs/config';
-import { MongodbModule } from './mongodb/mongodb.module';
-import { MongodbService } from './mongodb/mongodb.service';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+import { MongodbModule } from './modules/mongodb/mongodb.module';
+import { MongodbService } from './modules/mongodb/mongodb.service';
+import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [StaysModule, ConfigModule.forRoot({}), MongodbModule, UserModule, AuthModule],
