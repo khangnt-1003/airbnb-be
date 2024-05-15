@@ -7,7 +7,7 @@ export class MongodbService {
   constructor(@InjectConnection() private connection: Connection) {}
 
   getDatabaseName(): string {
-    console.log(this.connection.db.namespace);
+    // console.log(this.connection.db.namespace);
     return this.connection.db.databaseName;
   }
 }

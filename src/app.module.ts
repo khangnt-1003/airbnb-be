@@ -9,7 +9,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [StaysModule, ConfigModule.forRoot(), MongodbModule, UserModule, AuthModule],
+  imports: [StaysModule, ConfigModule.forRoot({}), MongodbModule, UserModule, AuthModule],
   controllers: [AppController],
   providers: [AppService, MongodbService],
 })
