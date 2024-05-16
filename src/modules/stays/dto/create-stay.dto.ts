@@ -16,12 +16,9 @@ export class CreateStayDto {
     @IsNotEmpty()
     price: number;
 
-    @IsNumber()
     rating?: number;
 
-    @IsArray()
     imgSrc?: Array<string>;
 
-    @IsArray()
     types?: Array<string>;
 }

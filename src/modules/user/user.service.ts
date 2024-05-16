@@ -4,17 +4,12 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from 'src/schemas/user.schema';
 import mongoose, { Model } from 'mongoose';
+import { BaseService } from 'src/bases/services.base';
 
 @Injectable()
-export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
-  async create(createUserDto: CreateUserDto) {
-    const createdUser = await this.userModel.create({
-      username: createUserDto.username,
-      password:  createUserDto.password
-    });
-    if (!createdUser) throw new BadRequestException("Create failed");
-    return createdUser;
+export class UserService extends BaseService<User, CreateUserDto, UpdateUserDto> {
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {
+    super(userModel);
   }
 
   async findByUsername(username: string) {
@@ -22,26 +17,6 @@ export class UserService {
       username
     });
     return foundUser[0];
-  }
-
-  findAll() {
-    return `This action returns all user`;
-  }
-
-  async findOne(id: string) {
-    const foundUser = await this.userModel.findById(new mongoose.Types.ObjectId(id)).lean();
-    if (!foundUser) throw new NotFoundException("User not found");
-    return foundUser;
-  }
-
-  async update(id: string, updateUserDto: UpdateUserDto) {
-    const updatedUser = await this.userModel.findByIdAndUpdate(new mongoose.Types.ObjectId(id), updateUserDto);
-    if (!updatedUser) throw new BadRequestException("Update failed");
-    return updatedUser;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 
   async removeRefreshToken (id: string) {
